@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Shirt, Sparkles, Eye, Heart, Star } from 'lucide-react';
+import { Shirt, Star, Eye } from 'lucide-react';
 
 const AIFashionSection = () => {
   const [selectedCategory, setSelectedCategory] = useState('traditional');
@@ -10,10 +10,10 @@ const AIFashionSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   
   const categories = [
-    { id: 'traditional', name: 'Traditional Sarees', icon: Shirt, color: 'from-kerala-gold to-yellow-400' },
-    { id: 'fusion', name: 'Modern Fusion', icon: Sparkles, color: 'from-kerala-red to-red-400' },
-    { id: 'mundu', name: 'Mundu Collections', icon: Star, color: 'from-kerala-green to-green-400' },
-    { id: 'festival', name: 'Festival Wear', icon: Heart, color: 'from-purple-500 to-pink-400' }
+    { id: 'traditional', name: 'Traditional Sarees' },
+    { id: 'fusion', name: 'Modern Fusion' },
+    { id: 'mundu', name: 'Mundu Collections' },
+    { id: 'festival', name: 'Festival Wear' }
   ];
 
   const outfits = {
@@ -57,144 +57,94 @@ const AIFashionSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-32 bg-gradient-to-br from-kerala-white to-gray-50 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-10 w-96 h-96 rounded-full bg-kerala-gold animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-64 h-64 rounded-full bg-kerala-red animate-pulse" style={{ animationDelay: '1s' }}></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Modern Section Header */}
-        <div className={`text-center mb-20 transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+    <section ref={sectionRef} className="py-24 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-6">
+        
+        {/* Clean section header */}
+        <div className={`text-center mb-16 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}>
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-kerala-gold/20 to-kerala-red/20 backdrop-blur-sm mb-6">
-            <Sparkles className="w-5 h-5 text-kerala-gold" />
-            <span className="text-kerala-green font-medium">AI Fashion Experience</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200 mb-6">
+            <Eye className="w-4 h-4 text-emerald-600" />
+            <span className="text-emerald-700 font-medium text-sm">AI Fashion Experience</span>
           </div>
-          <h2 className="kerala-serif text-5xl md:text-7xl font-bold text-kerala-green mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Virtual Try-On
-            <span className="block text-3xl md:text-4xl text-kerala-gold font-normal mt-2">
-              കേരള ഫാഷൻ
-            </span>
           </h2>
-          <p className="text-xl text-kerala-green/70 max-w-3xl mx-auto leading-relaxed">
-            Experience the perfect blend of tradition and technology with our AI-powered fashion showcase
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Experience the perfect blend of tradition and technology
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* 3D Avatar Preview */}
-          <div className={`relative transition-all duration-1000 delay-300 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+          
+          {/* Clean avatar preview */}
+          <div className={`transition-all duration-700 delay-200 ${
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
           }`}>
-            <div className="relative group">
-              <div className="absolute -inset-4 bg-gradient-to-r from-kerala-gold to-kerala-red rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
-              <div className="relative bg-gradient-to-br from-kerala-green to-kerala-green-light rounded-3xl p-12 h-[500px] flex items-center justify-center overflow-hidden">
-                {/* 3D Avatar Placeholder */}
-                <div className="relative">
-                  <div className="w-48 h-48 bg-gradient-to-br from-kerala-white/20 to-kerala-gold/20 rounded-full backdrop-blur-sm border border-kerala-gold/30 flex items-center justify-center">
-                    <div className="text-8xl animate-float">🧑‍🎨</div>
-                  </div>
-                  <div className="absolute -inset-8 border-2 border-dashed border-kerala-gold/30 rounded-full animate-spin opacity-50" style={{ animationDuration: '10s' }}></div>
+            <div className="relative">
+              <div className="bg-white rounded-3xl p-12 shadow-xl border border-gray-100">
+                <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center mb-8">
+                  <div className="text-6xl">👤</div>
                 </div>
-                
-                {/* Floating UI Elements */}
-                <div className="absolute top-8 right-8 glass-effect rounded-full p-3">
-                  <Eye className="w-6 h-6 text-kerala-gold" />
-                </div>
-                <div className="absolute bottom-8 left-8 glass-effect rounded-full p-3">
-                  <Heart className="w-6 h-6 text-kerala-red" />
-                </div>
+                <Button className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-4 rounded-xl">
+                  Try Virtual Fitting
+                </Button>
               </div>
-            </div>
-            
-            {/* Try-On Button */}
-            <div className="text-center mt-8">
-              <Button className="group bg-gradient-to-r from-kerala-gold to-yellow-400 hover:from-kerala-gold-dark hover:to-kerala-gold text-kerala-green font-semibold rounded-2xl px-8 py-4 text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
-                <Sparkles className="w-5 h-5 mr-2 group-hover:animate-spin" />
-                Try Virtual Fitting
-              </Button>
             </div>
           </div>
 
-          {/* Modern Outfit Selector */}
-          <div className={`transition-all duration-1000 delay-500 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+          {/* Clean outfit selector */}
+          <div className={`transition-all duration-700 delay-400 ${
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
           }`}>
-            {/* Category Pills */}
-            <div className="grid grid-cols-2 gap-4 mb-10">
-              {categories.map((category) => {
-                const IconComponent = category.icon;
-                return (
-                  <Card 
-                    key={category.id}
-                    className={`cursor-pointer transition-all duration-300 hover:scale-105 border-2 ${
-                      selectedCategory === category.id 
-                        ? 'border-kerala-gold shadow-lg shadow-kerala-gold/20' 
-                        : 'border-gray-200 hover:border-kerala-gold/50'
-                    }`}
-                    onClick={() => setSelectedCategory(category.id)}
-                  >
-                    <CardContent className="p-6 text-center">
-                      <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${category.color} mx-auto mb-3 flex items-center justify-center`}>
-                        <IconComponent className="w-6 h-6 text-white" />
-                      </div>
-                      <h3 className="font-semibold text-kerala-green text-sm">{category.name}</h3>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+            
+            {/* Category tabs */}
+            <div className="flex flex-wrap gap-2 mb-8">
+              {categories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
+                    selectedCategory === category.id 
+                      ? 'bg-gray-900 text-white shadow-lg' 
+                      : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+                  }`}
+                >
+                  {category.name}
+                </button>
+              ))}
             </div>
 
-            {/* Outfit Grid */}
+            {/* Outfit list */}
             <div className="space-y-4">
-              <h4 className="kerala-serif text-2xl font-semibold text-kerala-green mb-6">
-                {categories.find(c => c.id === selectedCategory)?.name}
-              </h4>
-              <div className="space-y-4">
-                {outfits[selectedCategory as keyof typeof outfits].map((outfit, index) => (
-                  <Card 
-                    key={index}
-                    className="group cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-kerala-green/20 overflow-hidden"
-                  >
-                    <CardContent className="p-6">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                          <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-kerala-gold/20 to-kerala-red/20 flex items-center justify-center">
-                            <Shirt className="w-8 h-8 text-kerala-green" />
-                          </div>
-                          <div>
-                            <h5 className="font-semibold text-kerala-green text-lg">{outfit.name}</h5>
-                            <p className="text-kerala-green/60">{outfit.color}</p>
-                            <div className="flex items-center gap-2 mt-1">
-                              <div className="flex items-center">
-                                {[...Array(5)].map((_, i) => (
-                                  <Star 
-                                    key={i} 
-                                    className={`w-3 h-3 ${i < Math.floor(outfit.rating) ? 'text-kerala-gold fill-current' : 'text-gray-300'}`} 
-                                  />
-                                ))}
-                              </div>
-                              <span className="text-xs text-kerala-green/60">{outfit.rating}</span>
-                            </div>
-                          </div>
+              {outfits[selectedCategory as keyof typeof outfits].map((outfit, index) => (
+                <Card key={index} className="border border-gray-200 hover:border-gray-300 transition-all duration-200 hover:shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center">
+                          <Shirt className="w-6 h-6 text-gray-600" />
                         </div>
-                        <div className="text-right">
-                          <div className="text-xl font-bold text-kerala-green mb-2">{outfit.price}</div>
-                          <Button 
-                            size="sm" 
-                            className="bg-kerala-green hover:bg-kerala-green-light text-white rounded-full px-4 transition-all duration-300 group-hover:scale-105"
-                          >
-                            Select
-                          </Button>
+                        <div>
+                          <h5 className="font-semibold text-gray-900">{outfit.name}</h5>
+                          <p className="text-gray-500">{outfit.color}</p>
+                          <div className="flex items-center gap-1 mt-1">
+                            <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                            <span className="text-sm text-gray-600">{outfit.rating}</span>
+                          </div>
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+                      <div className="text-right">
+                        <div className="text-lg font-bold text-gray-900 mb-2">{outfit.price}</div>
+                        <Button size="sm" className="bg-gray-900 hover:bg-gray-800 text-white px-4">
+                          Select
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </div>
