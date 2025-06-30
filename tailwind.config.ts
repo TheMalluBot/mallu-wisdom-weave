@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,16 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Kerala Theme Colors
+				kerala: {
+					gold: '#FFD700',
+					green: '#2F5233',
+					red: '#DC143C',
+					white: '#FDFBF7',
+					'gold-dark': '#DAA520',
+					'green-light': '#4A7C59',
+					'red-light': '#FF6B6B'
 				}
 			},
 			borderRadius: {
@@ -84,11 +95,36 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-20px)' }
+				},
+				'glow': {
+					'0%, 100%': { filter: 'drop-shadow(0 0 5px #FFD700)' },
+					'50%': { filter: 'drop-shadow(0 0 20px #FFD700)' }
+				},
+				'wave': {
+					'0%': { transform: 'translateX(-100%)' },
+					'100%': { transform: 'translateX(100%)' }
+				},
+				'fade-in-up': {
+					'0%': { opacity: '0', transform: 'translateY(30px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 3s ease-in-out infinite',
+				'glow': 'glow 2s ease-in-out infinite',
+				'wave': 'wave 3s ease-in-out infinite',
+				'fade-in-up': 'fade-in-up 0.6s ease-out'
+			},
+			backgroundImage: {
+				'kerala-gradient': 'linear-gradient(135deg, #2F5233 0%, #4A7C59 50%, #FFD700 100%)',
+				'gold-gradient': 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
+				'temple-gradient': 'linear-gradient(135deg, #DC143C 0%, #FF6B6B 100%)'
 			}
 		}
 	},
