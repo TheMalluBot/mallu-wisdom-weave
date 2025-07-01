@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Play, Star, Sparkles } from 'lucide-react';
+import HeroBackground from './HeroBackground';
 
 const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -11,84 +11,53 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-kerala-white to-kerala-coconut kerala-pattern">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <HeroBackground />
       
-      <div className={`relative z-10 text-center max-w-6xl mx-auto px-6 transition-all duration-700 ${
-        isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      {/* Floating Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="animate-float absolute top-20 right-20 text-6xl opacity-30">🥥</div>
+        <div className="animate-float absolute bottom-32 left-16 text-4xl opacity-40" style={{ animationDelay: '1s' }}>🌴</div>
+        <div className="animate-glow absolute top-40 left-20 text-3xl">🪔</div>
+      </div>
+
+      <div className={`relative z-10 text-center max-w-6xl mx-auto px-6 transition-all duration-1000 ${
+        isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}>
-        
-        {/* Cultural Badge */}
-        <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-card border border-border shadow-soft mb-8">
-          <Sparkles className="w-4 h-4 text-primary" />
-          <span className="kerala-malayalam text-kerala-forest font-medium">കേരളത്തിന്റെ സാംസ്കാരിക അനുഭവം</span>
-          <span className="text-muted-foreground">•</span>
-          <span className="kerala-body text-muted-foreground font-medium">Cultural Experience of Kerala</span>
-        </div>
-        
-        {/* Main Heading */}
-        <h1 className="kerala-heading text-display-xl md:text-display-xl font-bold mb-6 text-kerala-forest">
-          Experience
-          <span className="block text-transparent bg-gradient-to-r from-primary via-kerala-gold-dark to-accent bg-clip-text">
-            Kerala's Soul
-          </span>
+        <h1 className="kerala-serif text-5xl md:text-7xl font-bold mb-6 text-kerala-white kerala-text-shadow">
+          Experience Kerala
+          <span className="block text-kerala-gold">Like Never Before</span>
         </h1>
         
-        <p className="text-title-lg mb-6 text-kerala-forest/80 max-w-4xl mx-auto kerala-body">
-          Where Ancient Wisdom Meets Modern Innovation
+        <p className="text-xl md:text-2xl mb-8 text-kerala-white/90 max-w-3xl mx-auto leading-relaxed">
+          AI Fashion Meets Traditional Wisdom
         </p>
         
-        <p className="text-body-lg mb-12 text-muted-foreground max-w-3xl mx-auto kerala-body">
-          Discover the magic of God's Own Country through AI-powered cultural experiences, traditional stories, and timeless wisdom passed down through generations
+        <p className="text-lg mb-12 text-kerala-white/80 max-w-2xl mx-auto">
+          Try virtual Malayalam attire, discover ancient stories, and unlock Kerala's best-kept secrets
         </p>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <Button 
             size="lg" 
-            className="kerala-body bg-kerala-forest hover:bg-kerala-forest-light text-white font-semibold px-8 py-6 rounded-lg transition-all duration-300 shadow-medium hover:shadow-strong transform hover:-translate-y-1"
+            className="bg-kerala-gold hover:bg-kerala-gold-dark text-kerala-green font-semibold px-8 py-4 text-lg rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
-            <span className="kerala-malayalam mr-2">പരീക്ഷിക്കൂ</span>
-            Try AI Fashion
-            <ArrowRight className="w-4 h-4 ml-2" />
+            Try AI Fashion ✨
           </Button>
           <Button 
             size="lg" 
             variant="outline" 
-            className="kerala-body border-2 border-kerala-forest text-kerala-forest hover:bg-kerala-forest hover:text-white font-semibold px-8 py-6 rounded-lg transition-all duration-300 shadow-soft hover:shadow-medium"
+            className="border-kerala-white text-kerala-white hover:bg-kerala-white hover:text-kerala-green font-semibold px-8 py-4 text-lg rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
-            <Play className="w-4 h-4 mr-2" />
-            <span className="kerala-malayalam mr-2">കാണൂ</span>
-            Watch Demo
+            Explore Kerala Stories 📚
           </Button>
-        </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div className="text-center p-8 rounded-xl bg-card border border-border shadow-soft hover:shadow-medium transition-all duration-300">
-            <div className="text-display-md font-bold text-kerala-forest mb-2 kerala-heading">5000+</div>
-            <div className="kerala-malayalam text-primary font-semibold mb-1">വർഷങ്ങൾ</div>
-            <div className="kerala-body text-muted-foreground">Years of Heritage</div>
-          </div>
-          <div className="text-center p-8 rounded-xl bg-card border border-border shadow-soft hover:shadow-medium transition-all duration-300">
-            <div className="text-display-md font-bold text-kerala-forest mb-2 kerala-heading">44</div>
-            <div className="kerala-malayalam text-primary font-semibold mb-1">നദികൾ</div>
-            <div className="kerala-body text-muted-foreground">Sacred Rivers</div>
-          </div>
-          <div className="text-center p-8 rounded-xl bg-card border border-border shadow-soft hover:shadow-medium transition-all duration-300">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Star className="w-6 h-6 text-primary fill-current" />
-              <div className="text-display-md font-bold text-kerala-forest kerala-heading">4.9</div>
-            </div>
-            <div className="kerala-malayalam text-primary font-semibold mb-1">റേറ്റിംഗ്</div>
-            <div className="kerala-body text-muted-foreground">User Experience</div>
-          </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <div className="w-6 h-10 border-2 border-primary rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-bounce"></div>
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-kerala-gold rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-kerala-gold rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
     </section>

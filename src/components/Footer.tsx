@@ -1,134 +1,97 @@
 
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Mail, Facebook, Instagram, Twitter, MapPin } from 'lucide-react';
-
 const Footer = () => {
-  const [email, setEmail] = useState('');
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const footer = document.querySelector('footer');
-    if (footer) {
-      observer.observe(footer);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <footer className="bg-kerala-forest text-white">
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        
-        {/* Main footer content */}
-        <div className={`grid lg:grid-cols-4 gap-12 mb-12 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          
-          {/* Brand section */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shadow-soft">
-                <span className="text-kerala-forest font-bold text-xl kerala-heading">M</span>
-              </div>
-              <div>
-                <h3 className="kerala-heading text-2xl font-bold">MyMallu.com</h3>
-                <span className="kerala-malayalam text-primary font-medium">മൈമല്ലു.കോം</span>
+    <footer className="relative bg-kerala-green text-kerala-white overflow-hidden">
+      {/* Animated Wave Pattern */}
+      <div className="absolute top-0 left-0 w-full">
+        <svg className="w-full h-16" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path 
+            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" 
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+
+      <div className="relative z-10 pt-16 pb-8">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Main Footer Content */}
+          <div className="grid md:grid-cols-4 gap-8 mb-12">
+            {/* Brand Section */}
+            <div className="md:col-span-2">
+              <h3 className="kerala-serif text-3xl font-bold text-kerala-gold mb-4">
+                MyMallu.com
+                <span className="block text-lg text-kerala-white/80 mt-2">മൈമല്ലു.കോം</span>
+              </h3>
+              <p className="text-kerala-white/80 mb-6 leading-relaxed">
+                Bridging Kerala's timeless traditions with cutting-edge technology. 
+                Experience the magic of God's Own Country like never before.
+              </p>
+              <div className="flex space-x-4">
+                <div className="w-10 h-10 bg-kerala-gold/20 rounded-full flex items-center justify-center hover:bg-kerala-gold/30 transition-colors cursor-pointer">
+                  <span className="text-kerala-gold">📘</span>
+                </div>
+                <div className="w-10 h-10 bg-kerala-gold/20 rounded-full flex items-center justify-center hover:bg-kerala-gold/30 transition-colors cursor-pointer">
+                  <span className="text-kerala-gold">📷</span>
+                </div>
+                <div className="w-10 h-10 bg-kerala-gold/20 rounded-full flex items-center justify-center hover:bg-kerala-gold/30 transition-colors cursor-pointer">
+                  <span className="text-kerala-gold">🐦</span>
+                </div>
               </div>
             </div>
-            <p className="kerala-malayalam text-white/90 mb-6 leading-relaxed max-w-lg">
-              കേരളത്തിന്റെ കാലാതീതമായ പാരമ്പര്യങ്ങളെ അത്യാധുനിക സാങ്കേതികവിദ്യയുമായി ബന്ധിപ്പിക്കുന്നു. 
-              ദൈവത്തിന്റെ സ്വന്തം നാടിന്റെ മാന്ത്രികത അനുഭവിക്കൂ.
-            </p>
-            
-            <div className="flex space-x-4">
-              <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors duration-300 cursor-pointer">
-                <Facebook className="w-5 h-5" />
-              </div>
-              <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors duration-300 cursor-pointer">
-                <Instagram className="w-5 h-5" />
-              </div>
-              <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors duration-300 cursor-pointer">
-                <Twitter className="w-5 h-5" />
-              </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="font-semibold text-kerala-gold mb-4">Explore</h4>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-kerala-white/80 hover:text-kerala-gold transition-colors">AI Fashion</a></li>
+                <li><a href="#" className="text-kerala-white/80 hover:text-kerala-gold transition-colors">Kerala Stories</a></li>
+                <li><a href="#" className="text-kerala-white/80 hover:text-kerala-gold transition-colors">Wisdom Hub</a></li>
+                <li><a href="#" className="text-kerala-white/80 hover:text-kerala-gold transition-colors">Cultural Heritage</a></li>
+              </ul>
             </div>
-          </div>
 
-          {/* Quick links */}
-          <div>
-            <h4 className="kerala-malayalam font-semibold mb-6 text-primary">പര്യവേക്ഷണം ചെയ്യൂ</h4>
-            <ul className="space-y-4">
-              {[
-                { name: 'AI Fashion', ml: 'AI ഫാഷൻ' },
-                { name: 'Kerala Stories', ml: 'കേരള കഥകൾ' },
-                { name: 'Wisdom Hub', ml: 'ജ്ഞാന കേന്ദ്രം' },
-                { name: 'Cultural Heritage', ml: 'സാംസ്കാരിക പൈതൃകം' }
-              ].map((item, index) => (
-                <li key={index}>
-                  <a href="#" className="kerala-body text-white/80 hover:text-primary transition-colors duration-200 flex items-center gap-2 group">
-                    <div>
-                      <div className="font-medium">{item.name}</div>
-                      <div className="kerala-malayalam text-sm text-primary/80">{item.ml}</div>
-                    </div>
-                    <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Newsletter */}
-          <div>
-            <h4 className="kerala-malayalam font-semibold mb-4 text-primary">അപ്ഡേറ്റ് ചെയ്യൂ</h4>
-            <p className="kerala-malayalam text-white/80 mb-6 leading-relaxed">
-              പരമ്പരാഗത ടിപ്പുകളും സാംസ്കാരിക ഉൾക്കാഴ്ചകളും നിങ്ങളുടെ ഇൻബോക്സിൽ ലഭിക്കൂ
-            </p>
-            <div className="space-y-4">
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            {/* Newsletter */}
+            <div>
+              <h4 className="font-semibold text-kerala-gold mb-4">Daily Kerala Wisdom</h4>
+              <p className="text-kerala-white/80 text-sm mb-4">
+                Get traditional tips and cultural insights delivered to your inbox
+              </p>
+              <div className="flex flex-col space-y-2">
                 <input 
                   type="email" 
-                  placeholder="നിങ്ങളുടെ ഇമെയിൽ വിലാസം"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:border-primary kerala-malayalam"
+                  placeholder="Your email"
+                  className="bg-kerala-white/10 border border-kerala-gold/30 rounded-full px-4 py-2 text-kerala-white placeholder-kerala-white/60 focus:outline-none focus:border-kerala-gold"
                 />
+                <button className="bg-kerala-gold hover:bg-kerala-gold-dark text-kerala-green font-semibold py-2 rounded-full transition-colors">
+                  Subscribe ✨
+                </button>
               </div>
-              <Button className="w-full kerala-malayalam bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-lg">
-                സബ്സ്ക്രൈബ് ചെയ്യൂ
-              </Button>
             </div>
           </div>
-        </div>
 
-        {/* Bottom bar */}
-        <div className={`border-t border-white/20 pt-8 transition-all duration-700 delay-300 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-            <div className="kerala-body text-white/80">
-              © 2024 MyMallu.com. Made in God's Own Country with ❤️
+          {/* Bottom Bar */}
+          <div className="border-t border-kerala-white/20 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <div className="text-kerala-white/60 text-sm mb-4 md:mb-0">
+              © 2024 MyMallu.com. Made with ❤️ in God's Own Country
             </div>
-            
-            <div className="flex items-center space-x-8 kerala-body">
-              <a href="#" className="text-white/80 hover:text-primary transition-colors duration-200">Privacy Policy</a>
-              <a href="#" className="text-white/80 hover:text-primary transition-colors duration-200">Terms of Service</a>
+            <div className="flex items-center space-x-6 text-sm">
+              <a href="#" className="text-kerala-white/60 hover:text-kerala-gold transition-colors">Privacy Policy</a>
+              <a href="#" className="text-kerala-white/60 hover:text-kerala-gold transition-colors">Terms of Service</a>
               <div className="flex items-center space-x-2">
-                <MapPin className="w-4 h-4 text-primary" />
-                <span className="text-white/80">Kerala, India</span>
+                <span className="text-kerala-white/60">Powered by</span>
+                <span className="text-kerala-gold">Kerala Spirit</span>
+                <span className="animate-glow">🌟</span>
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Floating Elements */}
+      <div className="absolute inset-0 pointer-events-none opacity-10">
+        <div className="animate-float absolute top-20 left-10 text-3xl">🛶</div>
+        <div className="animate-float absolute top-32 right-20 text-2xl" style={{ animationDelay: '1s' }}>🥥</div>
+        <div className="animate-float absolute bottom-20 left-1/4 text-4xl" style={{ animationDelay: '2s' }}>🌴</div>
       </div>
     </footer>
   );

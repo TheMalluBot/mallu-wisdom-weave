@@ -1,157 +1,120 @@
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Shirt, Star, Sparkles, User } from 'lucide-react';
 
 const AIFashionSection = () => {
   const [selectedCategory, setSelectedCategory] = useState('traditional');
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
   
   const categories = [
-    { id: 'traditional', name: 'Traditional Sarees', malayalam: 'പരമ്പരാഗത സാരികൾ' },
-    { id: 'fusion', name: 'Modern Fusion', malayalam: 'ആധുനിക ഫ്യൂഷൻ' },
-    { id: 'mundu', name: 'Mundu Collections', malayalam: 'മുണ്ട് ശേഖരം' },
-    { id: 'festival', name: 'Festival Wear', malayalam: 'ഉത്സവ വസ്ത്രങ്ങൾ' }
+    { id: 'traditional', name: 'Traditional Sarees', emoji: '🥻' },
+    { id: 'fusion', name: 'Modern Fusion', emoji: '✨' },
+    { id: 'mundu', name: 'Mundu Collections', emoji: '👘' },
+    { id: 'festival', name: 'Festival Wear', emoji: '🎭' }
   ];
 
   const outfits = {
     traditional: [
-      { name: 'Kasavu Saree', malayalam: 'കാശാവ് സാരി', color: 'Golden Border', price: '₹2,999', rating: 4.8 },
-      { name: 'Kanchipuram Silk', malayalam: 'കാഞ്ചിപുരം പട്ട്', color: 'Royal Purple', price: '₹4,999', rating: 4.9 },
-      { name: 'Malabar Cotton', malayalam: 'മലബാർ കോട്ടൺ', color: 'Emerald Green', price: '₹1,899', rating: 4.7 }
+      { name: 'Kasavu Saree', color: 'Golden Border', image: '👗' },
+      { name: 'Kanchipuram Silk', color: 'Royal Purple', image: '👘' },
+      { name: 'Malabar Cotton', color: 'Emerald Green', image: '🥻' }
     ],
     fusion: [
-      { name: 'Indo-Western Kurta', malayalam: 'ഇന്തോ-വെസ്റ്റേൺ കുർത്ത', color: 'Sunset Orange', price: '₹2,499', rating: 4.6 },
-      { name: 'Contemporary Lehenga', malayalam: 'കണ്ടെംപററി ലെഹങ്ക', color: 'Ocean Blue', price: '₹3,799', rating: 4.8 },
-      { name: 'Modern Saree Gown', malayalam: 'മോഡേൺ സാരി ഗൗൺ', color: 'Rose Gold', price: '₹2,999', rating: 4.5 }
+      { name: 'Indo-Western Kurta', color: 'Sunset Orange', image: '👔' },
+      { name: 'Contemporary Lehenga', color: 'Ocean Blue', image: '👗' },
+      { name: 'Modern Saree Gown', color: 'Rose Gold', image: '👘' }
     ],
     mundu: [
-      { name: 'Traditional Mundu', malayalam: 'പരമ്പരാഗത മുണ്ട്', color: 'Pure White', price: '₹999', rating: 4.7 },
-      { name: 'Designer Mundu', malayalam: 'ഡിസൈനർ മുണ്ട്', color: 'Golden Zari', price: '₹1,599', rating: 4.8 },
-      { name: 'Festival Mundu', malayalam: 'ഉത്സവ മുണ്ട്', color: 'Temple Red', price: '₹1,299', rating: 4.6 }
+      { name: 'Traditional Mundu', color: 'Pure White', image: '👘' },
+      { name: 'Designer Mundu', color: 'Golden Zari', image: '👗' },
+      { name: 'Festival Mundu', color: 'Temple Red', image: '🥻' }
     ],
     festival: [
-      { name: 'Onam Special', malayalam: 'ഓണം സ്പെഷ്യൽ', color: 'Marigold Yellow', price: '₹2,199', rating: 4.9 },
-      { name: 'Vishu Outfit', malayalam: 'വിഷു വസ്ത്രം', color: 'Spring Green', price: '₹1,899', rating: 4.7 },
-      { name: 'Temple Wear', malayalam: 'ക്ഷേത്ര വസ്ത്രം', color: 'Sacred Saffron', price: '₹2,599', rating: 4.8 }
+      { name: 'Onam Special', color: 'Marigold Yellow', image: '👗' },
+      { name: 'Vishu Outfit', color: 'Spring Green', image: '👘' },
+      { name: 'Temple Wear', color: 'Sacred Saffron', image: '🥻' }
     ]
   };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section ref={sectionRef} className="py-24 bg-background kerala-pattern">
+    <section className="py-20 bg-kerala-white">
       <div className="max-w-7xl mx-auto px-6">
-        
         {/* Section Header */}
-        <div className={`text-center mb-16 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-card border border-border shadow-soft mb-6">
-            <Sparkles className="w-4 h-4 text-accent" />
-            <span className="kerala-malayalam text-kerala-forest font-medium">AI ഫാഷൻ അനുഭവം</span>
-            <span className="text-muted-foreground">•</span>
-            <span className="kerala-body text-muted-foreground font-medium">AI Fashion Experience</span>
-          </div>
-          <h2 className="kerala-heading text-display-lg font-bold text-kerala-forest mb-4">
-            Virtual Try-On Experience
+        <div className="text-center mb-16 animate-fade-in-up">
+          <h2 className="kerala-serif text-4xl md:text-5xl font-bold text-kerala-green mb-6">
+            AI Fashion Experience
           </h2>
-          <p className="text-body-lg text-muted-foreground max-w-3xl mx-auto kerala-body">
-            <span className="kerala-malayalam">പരമ്പരാഗതവും ആധുനികവുമായ കേരള ഫാഷൻ അനുഭവിക്കൂ</span>
+          <p className="text-xl text-kerala-green/80 max-w-3xl mx-auto">
+            From Kasavu to Contemporary - Find Your Perfect Look
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          
-          {/* Avatar Preview */}
-          <div className={`transition-all duration-700 delay-200 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-          }`}>
-            <Card className="border border-border shadow-medium">
-              <CardContent className="p-12">
-                <div className="aspect-square bg-muted rounded-xl flex items-center justify-center mb-8 relative overflow-hidden">
-                  <User className="w-24 h-24 text-muted-foreground" />
-                  <div className="absolute top-4 right-4 w-3 h-3 bg-primary rounded-full"></div>
-                </div>
-                <Button className="w-full kerala-body bg-kerala-forest hover:bg-kerala-forest-light text-white font-semibold py-4 rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
-                  <span className="kerala-malayalam mr-2">വെർച്വൽ ഫിറ്റിംഗ് ആരംഭിക്കൂ</span>
-                  Start Virtual Fitting
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Avatar Side */}
+          <div className="relative">
+            <div className="bg-kerala-gradient rounded-3xl p-8 h-96 flex items-center justify-center relative overflow-hidden">
+              <div className="text-9xl animate-float">👤</div>
+              <div className="absolute inset-0 bg-black/20 rounded-3xl"></div>
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                <Button className="bg-kerala-gold hover:bg-kerala-gold-dark text-kerala-green font-semibold rounded-full px-6">
+                  Try It On ✨
                 </Button>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
 
-          {/* Outfit Selector */}
-          <div className={`transition-all duration-700 delay-400 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-          }`}>
-            
-            {/* Category Tabs */}
-            <div className="grid grid-cols-2 gap-3 mb-8">
+          {/* Outfit Selector Side */}
+          <div>
+            {/* Category Selection */}
+            <div className="grid grid-cols-2 gap-4 mb-8">
               {categories.map((category) => (
-                <button
+                <Card 
                   key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`p-4 rounded-lg kerala-body font-medium transition-all duration-300 text-left ${
+                  className={`cursor-pointer transition-all duration-300 hover:scale-105 ${
                     selectedCategory === category.id 
-                      ? 'bg-kerala-forest text-white shadow-medium' 
-                      : 'bg-card text-foreground hover:bg-muted border border-border shadow-soft hover:shadow-medium'
+                      ? 'ring-2 ring-kerala-gold bg-kerala-gold/10' 
+                      : 'hover:shadow-lg'
                   }`}
+                  onClick={() => setSelectedCategory(category.id)}
                 >
-                  <div className="font-semibold text-sm">{category.name}</div>
-                  <div className="kerala-malayalam text-xs opacity-80">{category.malayalam}</div>
-                </button>
-              ))}
-            </div>
-
-            {/* Outfit List */}
-            <div className="space-y-4">
-              {outfits[selectedCategory as keyof typeof outfits].map((outfit, index) => (
-                <Card key={index} className="border border-border hover:shadow-medium transition-all duration-300">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center">
-                          <Shirt className="w-6 h-6 text-muted-foreground" />
-                        </div>
-                        <div>
-                          <h5 className="kerala-body font-semibold text-foreground">{outfit.name}</h5>
-                          <p className="kerala-malayalam text-sm text-primary font-medium">{outfit.malayalam}</p>
-                          <p className="kerala-body text-sm text-muted-foreground">{outfit.color}</p>
-                          <div className="flex items-center gap-1 mt-1">
-                            <Star className="w-3 h-3 text-primary fill-current" />
-                            <span className="kerala-body text-xs text-muted-foreground">{outfit.rating}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="kerala-body text-lg font-bold text-foreground mb-2">{outfit.price}</div>
-                        <Button size="sm" className="kerala-body bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 rounded-md font-medium">
-                          <span className="kerala-malayalam mr-1">തിരഞ്ഞെടുക്കൂ</span>
-                          Select
-                        </Button>
-                      </div>
-                    </div>
+                  <CardContent className="p-4 text-center">
+                    <div className="text-2xl mb-2">{category.emoji}</div>
+                    <h3 className="font-semibold text-kerala-green">{category.name}</h3>
                   </CardContent>
                 </Card>
               ))}
+            </div>
+
+            {/* Outfit Grid */}
+            <div className="space-y-4">
+              <h4 className="kerala-serif text-2xl font-semibold text-kerala-green mb-4">
+                {categories.find(c => c.id === selectedCategory)?.name}
+              </h4>
+              <div className="grid gap-4">
+                {outfits[selectedCategory as keyof typeof outfits].map((outfit, index) => (
+                  <Card 
+                    key={index}
+                    className="cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-lg border-kerala-green/20"
+                  >
+                    <CardContent className="p-4 flex items-center space-x-4">
+                      <div className="text-3xl">{outfit.image}</div>
+                      <div>
+                        <h5 className="font-semibold text-kerala-green">{outfit.name}</h5>
+                        <p className="text-kerala-green/60">{outfit.color}</p>
+                      </div>
+                      <div className="ml-auto">
+                        <Button 
+                          size="sm" 
+                          variant="outline"
+                          className="text-kerala-green border-kerala-green hover:bg-kerala-green hover:text-white"
+                        >
+                          Select
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
         </div>
