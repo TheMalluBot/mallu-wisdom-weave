@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Shirt, Star, Sparkles } from 'lucide-react';
+import { Shirt, Star, Sparkles, User } from 'lucide-react';
 
 const AIFashionSection = () => {
   const [selectedCategory, setSelectedCategory] = useState('traditional');
@@ -57,92 +57,95 @@ const AIFashionSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-32 bg-gradient-to-br from-kerala-white to-kerala-green/8">
+    <section ref={sectionRef} className="py-24 bg-background kerala-pattern">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* Enhanced section header with original Kerala styling */}
-        <div className={`text-center mb-20 transition-all duration-700 ${
+        {/* Section Header */}
+        <div className={`text-center mb-16 transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <div className="inline-flex items-center gap-4 px-8 py-4 rounded-full bg-gradient-to-r from-kerala-red/15 to-kerala-gold/15 border-2 border-kerala-gold/40 backdrop-blur-sm mb-8 shadow-xl">
-            <Sparkles className="w-6 h-6 text-kerala-gold animate-glow" />
-            <span className="text-kerala-green font-bold text-xl kerala-serif">AI ഫാഷൻ അനുഭവം</span>
-            <span className="text-gray-700 font-semibold">• AI Fashion Experience</span>
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-card border border-border shadow-soft mb-6">
+            <Sparkles className="w-4 h-4 text-accent" />
+            <span className="kerala-malayalam text-kerala-forest font-medium">AI ഫാഷൻ അനുഭവം</span>
+            <span className="text-muted-foreground">•</span>
+            <span className="kerala-body text-muted-foreground font-medium">AI Fashion Experience</span>
           </div>
-          <h2 className="kerala-serif text-5xl md:text-7xl font-bold text-kerala-green mb-6 kerala-text-shadow">
+          <h2 className="kerala-heading text-display-lg font-bold text-kerala-forest mb-4">
             Virtual Try-On Experience
           </h2>
-          <p className="text-2xl text-kerala-green/80 max-w-3xl mx-auto font-light leading-relaxed">
-            പരമ്പരാഗതവും ആധുനികവുമായ കേരള ഫാഷൻ അനുഭവിക്കൂ
+          <p className="text-body-lg text-muted-foreground max-w-3xl mx-auto kerala-body">
+            <span className="kerala-malayalam">പരമ്പരാഗതവും ആധുനികവുമായ കേരള ഫാഷൻ അനുഭവിക്കൂ</span>
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
           
-          {/* Enhanced avatar preview with original Kerala styling */}
+          {/* Avatar Preview */}
           <div className={`transition-all duration-700 delay-200 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
           }`}>
-            <div className="relative">
-              <div className="bg-gradient-to-br from-white via-kerala-gold/10 to-kerala-green/10 rounded-3xl p-16 shadow-2xl border-3 border-kerala-gold/40 backdrop-blur-sm">
-                <div className="aspect-square bg-gradient-to-br from-kerala-green/15 to-kerala-gold/15 rounded-3xl flex items-center justify-center mb-10 border-2 border-kerala-gold/30 shadow-xl">
-                  <div className="text-8xl animate-float">👤</div>
-                  <div className="absolute top-6 right-6 w-4 h-4 bg-kerala-gold rounded-full animate-pulse shadow-lg"></div>
+            <Card className="border border-border shadow-medium">
+              <CardContent className="p-12">
+                <div className="aspect-square bg-muted rounded-xl flex items-center justify-center mb-8 relative overflow-hidden">
+                  <User className="w-24 h-24 text-muted-foreground" />
+                  <div className="absolute top-4 right-4 w-3 h-3 bg-primary rounded-full"></div>
                 </div>
-                <Button className="w-full bg-gradient-to-r from-kerala-green to-kerala-green-light hover:from-kerala-green-light hover:to-kerala-green text-white font-bold py-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 text-lg kerala-serif">
-                  വെർച്വൽ ഫിറ്റിംഗ് ആരംഭിക്കൂ
+                <Button className="w-full kerala-body bg-kerala-forest hover:bg-kerala-forest-light text-white font-semibold py-4 rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
+                  <span className="kerala-malayalam mr-2">വെർച്വൽ ഫിറ്റിംഗ് ആരംഭിക്കൂ</span>
+                  Start Virtual Fitting
                 </Button>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </div>
 
-          {/* Enhanced outfit selector with original Kerala styling */}
+          {/* Outfit Selector */}
           <div className={`transition-all duration-700 delay-400 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
           }`}>
             
-            {/* Enhanced category tabs */}
-            <div className="grid grid-cols-2 gap-4 mb-12">
+            {/* Category Tabs */}
+            <div className="grid grid-cols-2 gap-3 mb-8">
               {categories.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`p-6 rounded-2xl font-semibold transition-all duration-300 text-left shadow-xl ${
+                  className={`p-4 rounded-lg kerala-body font-medium transition-all duration-300 text-left ${
                     selectedCategory === category.id 
-                      ? 'bg-gradient-to-r from-kerala-green to-kerala-green-light text-white shadow-2xl transform scale-105 border-2 border-kerala-gold' 
-                      : 'bg-white text-kerala-green hover:bg-kerala-gold/10 border-2 border-kerala-gold/30 shadow-xl hover:shadow-2xl hover:-translate-y-1'
+                      ? 'bg-kerala-forest text-white shadow-medium' 
+                      : 'bg-card text-foreground hover:bg-muted border border-border shadow-soft hover:shadow-medium'
                   }`}
                 >
-                  <div className="font-bold text-lg">{category.name}</div>
-                  <div className="text-sm opacity-90 kerala-serif">{category.malayalam}</div>
+                  <div className="font-semibold text-sm">{category.name}</div>
+                  <div className="kerala-malayalam text-xs opacity-80">{category.malayalam}</div>
                 </button>
               ))}
             </div>
 
-            {/* Enhanced outfit list */}
-            <div className="space-y-6">
+            {/* Outfit List */}
+            <div className="space-y-4">
               {outfits[selectedCategory as keyof typeof outfits].map((outfit, index) => (
-                <Card key={index} className="border-2 border-kerala-gold/30 hover:border-kerala-gold/60 transition-all duration-300 hover:shadow-2xl bg-gradient-to-r from-white via-kerala-gold/5 to-kerala-green/5 hover:-translate-y-1">
-                  <CardContent className="p-8">
+                <Card key={index} className="border border-border hover:shadow-medium transition-all duration-300">
+                  <CardContent className="p-6">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-6">
-                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-kerala-gold/30 to-kerala-green/30 flex items-center justify-center border-2 border-kerala-gold/40 shadow-lg">
-                          <Shirt className="w-8 h-8 text-kerala-green" />
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center">
+                          <Shirt className="w-6 h-6 text-muted-foreground" />
                         </div>
                         <div>
-                          <h5 className="font-bold text-kerala-green text-xl">{outfit.name}</h5>
-                          <p className="text-kerala-gold font-semibold kerala-serif">{outfit.malayalam}</p>
-                          <p className="text-gray-700 font-medium">{outfit.color}</p>
-                          <div className="flex items-center gap-2 mt-2">
-                            <Star className="w-5 h-5 text-kerala-gold fill-current" />
-                            <span className="font-medium text-gray-700">{outfit.rating}</span>
+                          <h5 className="kerala-body font-semibold text-foreground">{outfit.name}</h5>
+                          <p className="kerala-malayalam text-sm text-primary font-medium">{outfit.malayalam}</p>
+                          <p className="kerala-body text-sm text-muted-foreground">{outfit.color}</p>
+                          <div className="flex items-center gap-1 mt-1">
+                            <Star className="w-3 h-3 text-primary fill-current" />
+                            <span className="kerala-body text-xs text-muted-foreground">{outfit.rating}</span>
                           </div>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-kerala-green mb-4">{outfit.price}</div>
-                        <Button className="bg-kerala-gold hover:bg-kerala-gold-dark text-kerala-green hover:text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl">
-                          തിരഞ്ഞെടുക്കൂ
+                        <div className="kerala-body text-lg font-bold text-foreground mb-2">{outfit.price}</div>
+                        <Button size="sm" className="kerala-body bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 rounded-md font-medium">
+                          <span className="kerala-malayalam mr-1">തിരഞ്ഞെടുക്കൂ</span>
+                          Select
                         </Button>
                       </div>
                     </div>

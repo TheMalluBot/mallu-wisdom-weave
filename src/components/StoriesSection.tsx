@@ -16,7 +16,7 @@ const StoriesSection = () => {
       category: "പുരാണം • Mythology",
       icon: Crown,
       readTime: "5 min read",
-      color: "from-kerala-gold/25 to-kerala-red/25"
+      featured: true
     },
     {
       title: "Backwater Tales",
@@ -25,7 +25,7 @@ const StoriesSection = () => {
       category: "പ്രകൃതി • Nature",
       icon: Waves,
       readTime: "7 min read",
-      color: "from-kerala-green/25 to-blue-500/25"
+      featured: false
     },
     {
       title: "Temple Chronicles",
@@ -34,7 +34,7 @@ const StoriesSection = () => {
       category: "ചരിത്രം • History",
       icon: Building,
       readTime: "6 min read",
-      color: "from-kerala-red/25 to-kerala-gold/25"
+      featured: false
     },
     {
       title: "Spice Route Stories",
@@ -43,7 +43,7 @@ const StoriesSection = () => {
       category: "വ്യാപാരം • Trade",
       icon: Zap,
       readTime: "8 min read",
-      color: "from-kerala-green/25 to-kerala-gold/25"
+      featured: false
     },
     {
       title: "Fisherman's Tales",
@@ -52,7 +52,7 @@ const StoriesSection = () => {
       category: "സംസ്കാരം • Culture",
       icon: Fish,
       readTime: "4 min read",
-      color: "from-blue-500/25 to-kerala-green/25"
+      featured: false
     },
     {
       title: "Coconut Palm Legends",
@@ -61,7 +61,7 @@ const StoriesSection = () => {
       category: "പ്രകൃതി • Nature",
       icon: TreePine,
       readTime: "5 min read",
-      color: "from-kerala-green/25 to-kerala-gold/25"
+      featured: false
     }
   ];
 
@@ -83,68 +83,72 @@ const StoriesSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-32 bg-white">
+    <section ref={sectionRef} className="py-24 bg-kerala-coconut kerala-pattern">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* Enhanced section header with original Kerala styling */}
-        <div className={`text-center mb-20 transition-all duration-700 ${
+        {/* Section Header */}
+        <div className={`text-center mb-16 transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <div className="inline-flex items-center gap-4 px-8 py-4 rounded-full bg-gradient-to-r from-kerala-green/15 to-kerala-gold/15 border-2 border-kerala-green/40 backdrop-blur-sm mb-8 shadow-xl">
-            <BookOpen className="w-6 h-6 text-kerala-green" />
-            <span className="text-kerala-green font-bold text-xl kerala-serif">സാംസ്കാരിക കഥകൾ</span>
-            <span className="text-gray-700 font-semibold">• Cultural Stories</span>
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-card border border-border shadow-soft mb-6">
+            <BookOpen className="w-4 h-4 text-kerala-forest" />
+            <span className="kerala-malayalam text-kerala-forest font-medium">സാംസ്കാരിക കഥകൾ</span>
+            <span className="text-muted-foreground">•</span>
+            <span className="kerala-body text-muted-foreground font-medium">Cultural Stories</span>
           </div>
-          <h2 className="kerala-serif text-5xl md:text-7xl font-bold text-kerala-green mb-6 kerala-text-shadow">
+          <h2 className="kerala-heading text-display-lg font-bold text-kerala-forest mb-4">
             Malayalam Stories
           </h2>
-          <p className="text-2xl text-kerala-green/80 max-w-3xl mx-auto font-light leading-relaxed">
+          <p className="text-body-lg text-muted-foreground max-w-3xl mx-auto kerala-malayalam">
             കേരളത്തിന്റെ സമൃദ്ധമായ സാംസ്കാരിക പൈതൃകം കണ്ടെത്തുക
           </p>
         </div>
 
-        {/* Enhanced stories grid with original Kerala styling */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {/* Stories Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {stories.map((story, index) => {
             const IconComponent = story.icon;
             return (
               <Card 
                 key={index}
-                className={`group cursor-pointer transition-all duration-500 hover:shadow-2xl border-2 border-kerala-gold/30 hover:border-kerala-gold/60 bg-gradient-to-br ${story.color} backdrop-blur-sm transform hover:-translate-y-3 hover:scale-105 shadow-xl ${
+                className={`group cursor-pointer transition-all duration-500 hover:shadow-strong border border-border bg-card transform hover:-translate-y-1 ${
+                  story.featured ? 'ring-2 ring-primary/20' : ''
+                } ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <CardHeader className="pb-6">
-                  <div className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-kerala-gold/40 to-kerala-green/40 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border-2 border-kerala-gold/50 shadow-xl">
-                    <IconComponent className="w-10 h-10 text-kerala-green" />
+                <CardHeader className="pb-4">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-muted flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                    <IconComponent className="w-8 h-8" />
                   </div>
-                  <CardTitle className="text-2xl text-kerala-green text-center mb-3 kerala-serif">
+                  <CardTitle className="kerala-heading text-lg text-kerala-forest text-center mb-2">
                     {story.title}
                   </CardTitle>
-                  <div className="text-kerala-gold font-bold text-center mb-4 kerala-serif">
+                  <div className="kerala-malayalam text-primary font-medium text-center mb-3">
                     {story.titleMl}
                   </div>
-                  <div className="flex items-center justify-center gap-6 text-sm">
-                    <span className="px-6 py-3 bg-gradient-to-r from-kerala-green/25 to-kerala-gold/25 rounded-full text-kerala-green font-bold border-2 border-kerala-gold/40 shadow-lg">{story.category}</span>
-                    <div className="flex items-center gap-2 text-gray-700 font-medium">
-                      <Clock className="w-4 h-4" />
+                  <div className="flex items-center justify-center gap-4 text-xs">
+                    <span className="px-3 py-1 bg-muted rounded-full text-muted-foreground font-medium">{story.category}</span>
+                    <div className="flex items-center gap-1 text-muted-foreground">
+                      <Clock className="w-3 h-3" />
                       <span>{story.readTime}</span>
                     </div>
                   </div>
                 </CardHeader>
                 
                 <CardContent className="pt-0">
-                  <p className="text-gray-800 leading-relaxed mb-8 text-base">
+                  <p className="kerala-body text-muted-foreground leading-relaxed mb-6 text-sm">
                     {story.preview}
                   </p>
                   
                   <Button 
                     variant="ghost" 
-                    className="w-full group/btn text-kerala-green hover:text-white hover:bg-kerala-green font-bold py-4 rounded-2xl border-2 border-kerala-green/40 hover:border-kerala-green transition-all duration-300 shadow-lg hover:shadow-xl"
+                    className="w-full kerala-body text-kerala-forest hover:text-primary-foreground hover:bg-kerala-forest font-medium py-3 rounded-lg border border-border hover:border-kerala-forest transition-all duration-300"
                   >
-                    വായിക്കൂ • Read Story
-                    <ArrowRight className="w-5 h-5 ml-3 group-hover/btn:translate-x-2 transition-transform duration-300" />
+                    <span className="kerala-malayalam mr-2">വായിക്കൂ</span>
+                    Read Story
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                   </Button>
                 </CardContent>
               </Card>
@@ -152,12 +156,13 @@ const StoriesSection = () => {
           })}
         </div>
 
-        {/* Enhanced CTA with original Kerala styling */}
-        <div className={`text-center mt-20 transition-all duration-700 delay-700 ${
+        {/* CTA */}
+        <div className={`text-center mt-16 transition-all duration-700 delay-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <Button className="bg-gradient-to-r from-kerala-green to-kerala-green-light hover:from-kerala-green-light hover:to-kerala-green text-white font-bold px-12 py-6 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-300 text-lg kerala-serif">
-            എല്ലാ കഥകളും കാണൂ • Explore All Stories
+          <Button className="kerala-body bg-kerala-forest hover:bg-kerala-forest-light text-white font-semibold px-8 py-4 rounded-lg shadow-medium hover:shadow-strong transform hover:-translate-y-1 transition-all duration-300">
+            <span className="kerala-malayalam mr-2">എല്ലാ കഥകളും കാണൂ</span>
+            Explore All Stories
           </Button>
         </div>
       </div>
