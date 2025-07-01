@@ -1,13 +1,9 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
 
 @layer base {
   :root {
@@ -88,21 +84,37 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-['Inter'];
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   .kerala-serif {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair Display', 'Noto Sans Malayalam', serif;
+  }
+
+  .kerala-malayalam {
+    font-family: 'Noto Sans Malayalam', 'Inter', sans-serif;
   }
 
   .kerala-text-shadow {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .kerala-text-shadow-soft {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   .glass-effect {
     backdrop-filter: blur(10px);
-    background: rgba(253, 251, 247, 0.1);
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .kerala-pattern {
+    background-image: 
+      radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(220, 20, 60, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(47, 82, 51, 0.1) 0%, transparent 50%);
   }
 }
 
@@ -112,14 +124,14 @@ All colors MUST be HSL.
 }
 
 ::-webkit-scrollbar-track {
-  background: #2F5233;
+  background: hsl(122, 25%, 15%);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FFD700;
+  background: hsl(51, 100%, 50%);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #DAA520;
+  background: hsl(45, 100%, 45%);
 }

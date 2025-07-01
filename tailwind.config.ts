@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -63,15 +62,22 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Kerala Theme Colors
+				// Enhanced Kerala Theme Colors
 				kerala: {
-					gold: '#FFD700',
-					green: '#2F5233',
-					red: '#DC143C',
-					white: '#FDFBF7',
-					'gold-dark': '#DAA520',
-					'green-light': '#4A7C59',
-					'red-light': '#FF6B6B'
+					gold: '#D4AF37',
+					'gold-light': '#F4E4A6',
+					'gold-dark': '#B8941F',
+					green: '#1B4332',
+					'green-light': '#2D5016',
+					'green-dark': '#081C15',
+					red: '#C1121F',
+					'red-light': '#F72585',
+					'red-dark': '#90323D',
+					white: '#FEFAE0',
+					'white-soft': '#F8F6E8',
+					cream: '#F7F3E9',
+					brown: '#8B4513',
+					'brown-light': '#CD853F'
 				}
 			},
 			borderRadius: {
@@ -96,35 +102,52 @@ export default {
 						height: '0'
 					}
 				},
-				'float': {
-					'0%, 100%': { transform: 'translateY(0px)' },
-					'50%': { transform: 'translateY(-20px)' }
+				'kerala-float': {
+					'0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+					'50%': { transform: 'translateY(-15px) rotate(2deg)' }
 				},
-				'glow': {
-					'0%, 100%': { filter: 'drop-shadow(0 0 5px #FFD700)' },
-					'50%': { filter: 'drop-shadow(0 0 20px #FFD700)' }
+				'kerala-glow': {
+					'0%, 100%': { 
+						filter: 'drop-shadow(0 0 8px rgba(212, 175, 55, 0.6))',
+						transform: 'scale(1)'
+					},
+					'50%': { 
+						filter: 'drop-shadow(0 0 16px rgba(212, 175, 55, 0.8))',
+						transform: 'scale(1.05)'
+					}
 				},
-				'wave': {
-					'0%': { transform: 'translateX(-100%)' },
-					'100%': { transform: 'translateX(100%)' }
+				'kerala-pulse': {
+					'0%, 100%': { opacity: '0.6' },
+					'50%': { opacity: '1' }
 				},
 				'fade-in-up': {
 					'0%': { opacity: '0', transform: 'translateY(30px)' },
 					'100%': { opacity: '1', transform: 'translateY(0)' }
+				},
+				'fade-in-scale': {
+					'0%': { opacity: '0', transform: 'scale(0.8)' },
+					'100%': { opacity: '1', transform: 'scale(1)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'float': 'float 3s ease-in-out infinite',
-				'glow': 'glow 2s ease-in-out infinite',
-				'wave': 'wave 3s ease-in-out infinite',
-				'fade-in-up': 'fade-in-up 0.6s ease-out'
+				'kerala-float': 'kerala-float 4s ease-in-out infinite',
+				'kerala-glow': 'kerala-glow 3s ease-in-out infinite',
+				'kerala-pulse': 'kerala-pulse 2s ease-in-out infinite',
+				'fade-in-up': 'fade-in-up 0.8s ease-out',
+				'fade-in-scale': 'fade-in-scale 0.6s ease-out'
 			},
 			backgroundImage: {
-				'kerala-gradient': 'linear-gradient(135deg, #2F5233 0%, #4A7C59 50%, #FFD700 100%)',
-				'gold-gradient': 'linear-gradient(135deg, #FFD700 0%, #DAA520 100%)',
-				'temple-gradient': 'linear-gradient(135deg, #DC143C 0%, #FF6B6B 100%)'
+				'kerala-gradient': 'linear-gradient(135deg, #1B4332 0%, #2D5016 35%, #D4AF37 100%)',
+				'kerala-gradient-soft': 'linear-gradient(135deg, rgba(27, 67, 50, 0.9) 0%, rgba(45, 80, 22, 0.8) 35%, rgba(212, 175, 55, 0.7) 100%)',
+				'kerala-pattern': 'radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(193, 18, 31, 0.1) 0%, transparent 50%)',
+				'gold-shimmer': 'linear-gradient(135deg, #D4AF37 0%, #F4E4A6 50%, #D4AF37 100%)'
+			},
+			boxShadow: {
+				'kerala-soft': '0 4px 20px rgba(27, 67, 50, 0.15)',
+				'kerala-gold': '0 4px 20px rgba(212, 175, 55, 0.25)',
+				'kerala-glow': '0 0 30px rgba(212, 175, 55, 0.3)'
 			}
 		}
 	},
