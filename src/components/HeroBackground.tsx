@@ -2,28 +2,29 @@
 const HeroBackground = () => {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Enhanced Background Gradient */}
-      <div className="absolute inset-0 bg-kerala-gradient"></div>
+      {/* Main Background Image */}
+      <div className="absolute inset-0">
+        <img 
+          src="/lovable-uploads/ebc556c8-6576-4580-a2fb-dfa229a2247f.png"
+          alt="Kerala Backwaters"
+          className="w-full h-full object-cover"
+        />
+      </div>
       
-      {/* Kerala Pattern Overlay */}
-      <div className="absolute inset-0 bg-kerala-pattern opacity-40"></div>
+      {/* Gradient overlay for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/40"></div>
       
-      {/* Overlay for optimal text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40"></div>
+      {/* Additional overlay for better contrast */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50"></div>
       
-      {/* Floating Kerala Cultural Elements */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 left-0 w-full h-full">
-          {/* Coconut Palm Silhouette */}
-          <div className="absolute top-20 left-10 w-32 h-32 opacity-30">
-            <svg viewBox="0 0 100 100" className="w-full h-full text-kerala-gold">
-              <path d="M50 90 L50 40 M30 45 Q40 35 50 40 Q60 35 70 45 M25 50 Q35 40 50 40 Q65 40 75 50 M35 55 Q45 45 50 40 Q55 45 65 55" 
-                    stroke="currentColor" strokeWidth="2" fill="none" className="animate-kerala-pulse"/>
-            </svg>
-          </div>
-          
-          {/* Traditional Lamp (Diya) */}
-          <div className="absolute top-40 right-20 w-24 h-24 opacity-40">
+      {/* Subtle Kerala pattern overlay */}
+      <div className="absolute inset-0 bg-kerala-pattern opacity-10"></div>
+
+      {/* Floating Kerala Cultural Elements - positioned to not interfere with the image */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <div className="absolute inset-0">
+          {/* Traditional Lamp - positioned in upper left area */}
+          <div className="absolute top-20 left-10 w-16 h-16 opacity-30">
             <svg viewBox="0 0 100 100" className="w-full h-full text-kerala-gold animate-kerala-glow">
               <ellipse cx="50" cy="70" rx="25" ry="8" fill="currentColor"/>
               <ellipse cx="50" cy="65" rx="20" ry="6" fill="currentColor"/>
@@ -31,28 +32,19 @@ const HeroBackground = () => {
             </svg>
           </div>
           
-          {/* Spice/Cardamom */}
-          <div className="absolute bottom-32 left-1/4 w-20 h-20 opacity-25">
-            <svg viewBox="0 0 100 100" className="w-full h-full text-kerala-green animate-kerala-float">
+          {/* Spice/Cardamom - positioned in right area */}
+          <div className="absolute top-40 right-20 w-12 h-12 opacity-25">
+            <svg viewBox="0 0 100 100" className="w-full h-full text-kerala-gold animate-kerala-float">
               <ellipse cx="50" cy="50" rx="15" ry="30" fill="currentColor"/>
               <ellipse cx="50" cy="50" rx="10" ry="25" fill="currentColor" opacity="0.7"/>
-            </svg>
-          </div>
-          
-          {/* Temple Architecture Element */}
-          <div className="absolute bottom-20 right-10 w-28 h-28 opacity-20">
-            <svg viewBox="0 0 100 100" className="w-full h-full text-kerala-gold">
-              <rect x="20" y="60" width="60" height="30" fill="currentColor"/>
-              <polygon points="15,60 50,30 85,60" fill="currentColor"/>
-              <rect x="40" y="70" width="20" height="20" fill="rgba(0,0,0,0.3)"/>
             </svg>
           </div>
         </div>
       </div>
 
-      {/* Enhanced Wave Effect */}
+      {/* Enhanced Wave Effect at bottom */}
       <div className="absolute bottom-0 left-0 w-full">
-        <svg className="w-full h-32" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <svg className="w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
           <defs>
             <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="rgba(254, 250, 224, 0.1)" />
