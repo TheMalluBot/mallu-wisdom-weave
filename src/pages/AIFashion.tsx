@@ -1,81 +1,114 @@
 
 import { useState } from 'react';
-import UserPreferencesForm from '@/components/UserPreferencesForm';
-import SmartRecommendations from '@/components/SmartRecommendations';
+import AvatarPanel from '@/components/fashion/AvatarPanel';
+import PhysicalProfilePanel from '@/components/fashion/PhysicalProfilePanel';
+import StylePreferencesPanel from '@/components/fashion/StylePreferencesPanel';
+import RecommendationsSection from '@/components/fashion/RecommendationsSection';
 
-interface UserPreferences {
+export interface UserProfile {
+  // Physical attributes
+  bodyShape: string;
   height: number;
-  bodyType: string;
+  build: string;
   skinTone: string;
+  skinUndertone: string;
+  faceShape: string;
   ageGroup: string;
+  
+  // Style preferences
   occasions: string[];
-  colorPreferences: string[];
-  budgetRange: string;
   styleGoals: string[];
+  favoriteColors: string[];
+  avoidColors: string[];
+  boldnessPreference: number;
+  
+  // Completion tracking
+  physicalComplete: boolean;
+  styleComplete: boolean;
 }
 
 const AIFashion = () => {
-  const [userPreferences, setUserPreferences] = useState<UserPreferences | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile>({
+    bodyShape: '',
+    height: 165,
+    build: '',
+    skinTone: '',
+    skinUndertone: '',
+    faceShape: '',
+    ageGroup: '',
+    occasions: [],
+    styleGoals: [],
+    favoriteColors: [],
+    avoidColors: [],
+    boldnessPreference: 50,
+    physicalComplete: false,
+    styleComplete: false
+  });
 
-  const handlePreferencesSubmit = (preferences: UserPreferences) => {
-    setUserPreferences(preferences);
+  const updateProfile = (updates: Partial<UserProfile>) => {
+    setUserProfile(prev => ({ ...prev, ...updates }));
+  };
+
+  const calculatePhysicalCompletion = () => {
+    const requiredFields = ['bodyShape', 'build', 'skinTone', 'faceShape', 'ageGroup'];
+    const completed = requiredFields.filter(field => userProfile[field as keyof UserProfile]).length;
+    return Math.round((completed / requiredFields.length) * 100);
+  };
+
+  const calculateStyleCompletion = () => {
+    let completed = 0;
+    if (userProfile.occasions.length > 0) completed++;
+    if (userProfile.styleGoals.length > 0) completed++;
+    if (userProfile.favoriteColors.length > 0) completed++;
+    return Math.round((completed / 3) * 100);
   };
 
   return (
-    <div className="min-h-screen bg-kerala-white">
+    <div className="min-h-screen bg-[#1a1b23] text-white">
       {/* Header */}
-      <div className="bg-kerala-gradient text-white py-12">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="kerala-serif text-4xl md:text-5xl font-bold mb-4">
+      <div className="bg-gradient-to-r from-[#252631] to-[#2a2d3a] border-b border-[#2a2d3a]">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <h1 className="kerala-serif text-4xl font-bold text-white mb-2">
             AI Fashion Assistant
           </h1>
-          <p className="text-xl text-kerala-white/90 max-w-2xl mx-auto">
-            Discover your perfect Kerala-inspired style with personalized AI recommendations
+          <p className="text-gray-300 text-lg">
+            Personalized styling based on your unique profile and Kerala's fashion heritage
           </p>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid lg:grid-cols-[65%_35%] gap-8 min-h-[600px]">
-          {/* Left Side - Avatar/Visual Area (65%) */}
-          <div className="bg-gradient-to-br from-kerala-green/5 to-kerala-gold/5 rounded-2xl p-8 flex items-center justify-center">
-            <div className="text-center">
-              <div className="text-9xl mb-6 animate-kerala-float">👤</div>
-              <h3 className="kerala-serif text-2xl font-bold text-kerala-green mb-4">
-                Your Virtual Avatar
-              </h3>
-              <p className="text-kerala-green/70 max-w-md">
-                {userPreferences 
-                  ? `Height: ${userPreferences.height}cm | Body Type: ${userPreferences.bodyType} | Skin Tone: ${userPreferences.skinTone}`
-                  : "Complete your preferences to see personalized styling recommendations"
-                }
-              </p>
-              
-              {userPreferences && (
-                <div className="mt-8 p-6 bg-white/50 rounded-xl backdrop-blur-sm">
-                  <h4 className="font-semibold text-kerala-green mb-3">Your Style Profile</h4>
-                  <div className="space-y-2 text-sm text-kerala-green/80">
-                    <div>Age Group: {userPreferences.ageGroup}</div>
-                    <div>Budget: {userPreferences.budgetRange}</div>
-                    <div>Occasions: {userPreferences.occasions.join(', ')}</div>
-                    <div>Style Goals: {userPreferences.styleGoals.join(', ')}</div>
-                  </div>
-                </div>
-              )}
-            </div>
+      {/* Three Panel Layout */}
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 min-h-[800px]">
+          {/* Left Panel - Avatar Display (50%) */}
+          <div className="lg:col-span-2">
+            <AvatarPanel userProfile={userProfile} />
           </div>
 
-          {/* Right Side - Preferences Form (35%) */}
-          <div className="bg-white rounded-2xl shadow-kerala-soft p-6 overflow-y-auto max-h-[80vh]">
-            <UserPreferencesForm onSubmit={handlePreferencesSubmit} />
+          {/* Middle Panel - Physical Configuration (25%) */}
+          <div className="lg:col-span-1">
+            <PhysicalProfilePanel 
+              userProfile={userProfile}
+              updateProfile={updateProfile}
+              completionPercentage={calculatePhysicalCompletion()}
+            />
+          </div>
+
+          {/* Right Panel - Style Configuration (25%) */}
+          <div className="lg:col-span-1">
+            <StylePreferencesPanel 
+              userProfile={userProfile}
+              updateProfile={updateProfile}
+              completionPercentage={calculateStyleCompletion()}
+            />
           </div>
         </div>
 
         {/* Recommendations Section */}
-        {userPreferences && (
+        {(userProfile.physicalComplete || userProfile.styleComplete || 
+          calculatePhysicalCompletion() > 60 || calculateStyleCompletion() > 60) && (
           <div className="mt-12">
-            <SmartRecommendations preferences={userPreferences} />
+            <RecommendationsSection userProfile={userProfile} />
           </div>
         )}
       </div>
