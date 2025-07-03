@@ -1,40 +1,100 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import UserPreferencesForm from './UserPreferencesForm';
+import SmartRecommendations from './SmartRecommendations';
+import KeralaFashionGuide from './KeralaFashionGuide';
+
+interface UserPreferences {
+  height: number;
+  bodyType: string;
+  skinTone: string;
+  ageGroup: string;
+  occasions: string[];
+  colorPreferences: string[];
+  budgetRange: string;
+  styleGoals: string[];
+}
 
 const AIFashionSection = () => {
-  const [selectedCategory, setSelectedCategory] = useState('traditional');
-  
-  const categories = [
-    { id: 'traditional', name: 'Traditional Sarees', emoji: '🥻' },
-    { id: 'fusion', name: 'Modern Fusion', emoji: '✨' },
-    { id: 'mundu', name: 'Mundu Collections', emoji: '👘' },
-    { id: 'festival', name: 'Festival Wear', emoji: '🎭' }
-  ];
+  const [currentStep, setCurrentStep] = useState<'intro' | 'preferences' | 'recommendations'>('intro');
+  const [userPreferences, setUserPreferences] = useState<UserPreferences | null>(null);
 
-  const outfits = {
-    traditional: [
-      { name: 'Kasavu Saree', color: 'Golden Border', image: '👗' },
-      { name: 'Kanchipuram Silk', color: 'Royal Purple', image: '👘' },
-      { name: 'Malabar Cotton', color: 'Emerald Green', image: '🥻' }
-    ],
-    fusion: [
-      { name: 'Indo-Western Kurta', color: 'Sunset Orange', image: '👔' },
-      { name: 'Contemporary Lehenga', color: 'Ocean Blue', image: '👗' },
-      { name: 'Modern Saree Gown', color: 'Rose Gold', image: '👘' }
-    ],
-    mundu: [
-      { name: 'Traditional Mundu', color: 'Pure White', image: '👘' },
-      { name: 'Designer Mundu', color: 'Golden Zari', image: '👗' },
-      { name: 'Festival Mundu', color: 'Temple Red', image: '🥻' }
-    ],
-    festival: [
-      { name: 'Onam Special', color: 'Marigold Yellow', image: '👗' },
-      { name: 'Vishu Outfit', color: 'Spring Green', image: '👘' },
-      { name: 'Temple Wear', color: 'Sacred Saffron', image: '🥻' }
-    ]
+  const handlePreferencesSubmit = (preferences: UserPreferences) => {
+    setUserPreferences(preferences);
+    setCurrentStep('recommendations');
   };
+
+  const resetToStart = () => {
+    setCurrentStep('intro');
+    setUserPreferences(null);
+  };
+
+  if (currentStep === 'preferences') {
+    return (
+      <section className="py-20 bg-kerala-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="kerala-serif text-4xl md:text-5xl font-bold text-kerala-green mb-6">
+              Tell Us About You
+            </h2>
+            <p className="text-xl text-kerala-green/80 max-w-3xl mx-auto">
+              Help our AI stylist understand your preferences for personalized recommendations
+            </p>
+          </div>
+          
+          <UserPreferencesForm onSubmit={handlePreferencesSubmit} />
+          
+          <div className="text-center mt-8">
+            <Button 
+              variant="outline" 
+              onClick={() => setCurrentStep('intro')}
+              className="text-kerala-green border-kerala-green hover:bg-kerala-green hover:text-white"
+            >
+              Back to Overview
+            </Button>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (currentStep === 'recommendations' && userPreferences) {
+    return (
+      <section className="py-20 bg-kerala-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="kerala-serif text-4xl md:text-5xl font-bold text-kerala-green mb-6">
+              Your AI Fashion Recommendations
+            </h2>
+            <p className="text-xl text-kerala-green/80 max-w-3xl mx-auto">
+              Personalized styling suggestions based on your preferences and Kerala's rich fashion heritage
+            </p>
+          </div>
+          
+          <SmartRecommendations preferences={userPreferences} />
+          
+          <div className="text-center mt-12 space-x-4">
+            <Button 
+              onClick={() => setCurrentStep('preferences')}
+              variant="outline"
+              className="text-kerala-green border-kerala-green hover:bg-kerala-green hover:text-white"
+            >
+              Update Preferences
+            </Button>
+            <Button 
+              onClick={resetToStart}
+              className="bg-kerala-gold hover:bg-kerala-gold-dark text-kerala-green"
+            >
+              Start Over
+            </Button>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-20 bg-kerala-white">
@@ -44,80 +104,177 @@ const AIFashionSection = () => {
           <h2 className="kerala-serif text-4xl md:text-5xl font-bold text-kerala-green mb-6">
             AI Fashion Experience
           </h2>
-          <p className="text-xl text-kerala-green/80 max-w-3xl mx-auto">
-            From Kasavu to Contemporary - Find Your Perfect Look
+          <p className="text-xl text-kerala-green/80 max-w-3xl mx-auto mb-8">
+            From Kasavu to Contemporary - Find Your Perfect Look with Smart AI Styling
           </p>
+          
+          <Button 
+            onClick={() => setCurrentStep('preferences')}
+            size="lg"
+            className="bg-kerala-gold hover:bg-kerala-gold-dark text-kerala-green font-semibold px-8 py-4 text-lg rounded-full"
+          >
+            Get My AI Recommendations ✨
+          </Button>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Avatar Side */}
-          <div className="relative">
-            <div className="bg-kerala-gradient rounded-3xl p-8 h-96 flex items-center justify-center relative overflow-hidden">
-              <div className="text-9xl animate-float">👤</div>
-              <div className="absolute inset-0 bg-black/20 rounded-3xl"></div>
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                <Button className="bg-kerala-gold hover:bg-kerala-gold-dark text-kerala-green font-semibold rounded-full px-6">
-                  Try It On ✨
-                </Button>
-              </div>
-            </div>
-          </div>
+        <Tabs defaultValue="features" className="w-full">
+          <TabsList className="grid w-full grid-cols-3 mb-8">
+            <TabsTrigger value="features">AI Features</TabsTrigger>
+            <TabsTrigger value="guide">Kerala Fashion Guide</TabsTrigger>
+            <TabsTrigger value="how-it-works">How It Works</TabsTrigger>
+          </TabsList>
 
-          {/* Outfit Selector Side */}
-          <div>
-            {/* Category Selection */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              {categories.map((category) => (
-                <Card 
-                  key={category.id}
-                  className={`cursor-pointer transition-all duration-300 hover:scale-105 ${
-                    selectedCategory === category.id 
-                      ? 'ring-2 ring-kerala-gold bg-kerala-gold/10' 
-                      : 'hover:shadow-lg'
-                  }`}
-                  onClick={() => setSelectedCategory(category.id)}
-                >
-                  <CardContent className="p-4 text-center">
-                    <div className="text-2xl mb-2">{category.emoji}</div>
-                    <h3 className="font-semibold text-kerala-green">{category.name}</h3>
+          <TabsContent value="features" className="space-y-8">
+            <div className="grid lg:grid-cols-3 gap-8">
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="text-4xl mb-4">🎯</div>
+                  <CardTitle className="text-kerala-green">Smart Recommendations</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 text-kerala-green/70">
+                    <li>• Height-based styling advice</li>
+                    <li>• Body type optimization</li>
+                    <li>• Color psychology integration</li>
+                    <li>• Occasion-specific suggestions</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="text-4xl mb-4">🏛️</div>
+                  <CardTitle className="text-kerala-green">Kerala Heritage</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 text-kerala-green/70">
+                    <li>• Traditional Kasavu sarees</li>
+                    <li>• Mundu collections</li>
+                    <li>• Festival wear guidance</li>
+                    <li>• Cultural significance</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="text-4xl mb-4">🎨</div>
+                  <CardTitle className="text-kerala-green">Personalized Styling</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 text-kerala-green/70">
+                    <li>• Skin tone analysis</li>
+                    <li>• Budget-friendly options</li>
+                    <li>• Style goal achievement</li>
+                    <li>• Mix & match suggestions</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Interactive Preview */}
+            <Card className="bg-kerala-gradient text-white">
+              <CardContent className="p-8">
+                <div className="grid lg:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <h3 className="kerala-serif text-2xl font-bold mb-4">Try Our AI Stylist</h3>
+                    <p className="mb-6">
+                      Get personalized recommendations based on your body type, preferences, and Kerala's fashion heritage.
+                    </p>
+                    <Button 
+                      onClick={() => setCurrentStep('preferences')}
+                      className="bg-kerala-gold hover:bg-kerala-gold-dark text-kerala-green"
+                    >
+                      Start Styling Session
+                    </Button>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-8xl animate-kerala-float">👗</div>
+                    <p className="mt-4 text-kerala-white/80">AI-Powered Fashion Assistant</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="guide">
+            <KeralaFashionGuide />
+          </TabsContent>
+
+          <TabsContent value="how-it-works" className="space-y-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                {
+                  step: '1',
+                  title: 'Profile Creation',
+                  description: 'Share your physical attributes, style preferences, and goals',
+                  icon: '👤'
+                },
+                {
+                  step: '2', 
+                  title: 'AI Analysis',
+                  description: 'Our AI analyzes your profile and Kerala fashion database',
+                  icon: '🤖'
+                },
+                {
+                  step: '3',
+                  title: 'Smart Suggestions',
+                  description: 'Receive personalized outfit recommendations and styling tips',
+                  icon: '✨'
+                },
+                {
+                  step: '4',
+                  title: 'Shop & Style',
+                  description: 'Get direct shopping links and complete your perfect look',
+                  icon: '🛍️'
+                }
+              ].map((item) => (
+                <Card key={item.step} className="text-center hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <div className="text-4xl mb-4">{item.icon}</div>
+                    <h3 className="font-bold text-kerala-green mb-2">
+                      Step {item.step}: {item.title}
+                    </h3>
+                    <p className="text-kerala-green/70 text-sm">{item.description}</p>
                   </CardContent>
                 </Card>
               ))}
             </div>
 
-            {/* Outfit Grid */}
-            <div className="space-y-4">
-              <h4 className="kerala-serif text-2xl font-semibold text-kerala-green mb-4">
-                {categories.find(c => c.id === selectedCategory)?.name}
-              </h4>
-              <div className="grid gap-4">
-                {outfits[selectedCategory as keyof typeof outfits].map((outfit, index) => (
-                  <Card 
-                    key={index}
-                    className="cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-lg border-kerala-green/20"
-                  >
-                    <CardContent className="p-4 flex items-center space-x-4">
-                      <div className="text-3xl">{outfit.image}</div>
-                      <div>
-                        <h5 className="font-semibold text-kerala-green">{outfit.name}</h5>
-                        <p className="text-kerala-green/60">{outfit.color}</p>
-                      </div>
-                      <div className="ml-auto">
-                        <Button 
-                          size="sm" 
-                          variant="outline"
-                          className="text-kerala-green border-kerala-green hover:bg-kerala-green hover:text-white"
-                        >
-                          Select
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+            <Card className="bg-kerala-white border-kerala-gold border-2">
+              <CardHeader>
+                <CardTitle className="text-kerala-green text-center">
+                  Why Choose Our AI Fashion Assistant?
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-3 gap-6 text-center">
+                  <div>
+                    <div className="text-3xl mb-3">🎯</div>
+                    <h4 className="font-semibold text-kerala-green mb-2">Personalized</h4>
+                    <p className="text-kerala-green/70 text-sm">
+                      Recommendations tailored to your unique body type and preferences
+                    </p>
+                  </div>
+                  <div>
+                    <div className="text-3xl mb-3">🏛️</div>
+                    <h4 className="font-semibold text-kerala-green mb-2">Cultural</h4>
+                    <p className="text-kerala-green/70 text-sm">
+                      Authentic Kerala fashion heritage integrated with modern styling
+                    </p>
+                  </div>
+                  <div>
+                    <div className="text-3xl mb-3">🧠</div>
+                    <h4 className="font-semibold text-kerala-green mb-2">Smart</h4>
+                    <p className="text-kerala-green/70 text-sm">
+                      AI-powered analysis for optimal color, fit, and style recommendations
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </section>
   );
