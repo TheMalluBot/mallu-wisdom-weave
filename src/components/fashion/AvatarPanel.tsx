@@ -1,24 +1,13 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import { UserProfile } from '@/pages/AIFashion';
+import DigitalAvatar from './DigitalAvatar';
 
 interface AvatarPanelProps {
   userProfile: UserProfile;
 }
 
 const AvatarPanel = ({ userProfile }: AvatarPanelProps) => {
-  const getAvatarStyle = () => {
-    const styles = [];
-    
-    if (userProfile.height < 160) styles.push('Petite styling');
-    else if (userProfile.height > 170) styles.push('Tall styling');
-    
-    if (userProfile.bodyShape) styles.push(`${userProfile.bodyShape} optimized`);
-    if (userProfile.skinTone) styles.push(`${userProfile.skinTone} tone matched`);
-    
-    return styles;
-  };
-
   const getOutfitRecommendation = () => {
     if (!userProfile.bodyShape) return "Complete your profile to see personalized styling";
     
@@ -38,21 +27,25 @@ const AvatarPanel = ({ userProfile }: AvatarPanelProps) => {
     }
   };
 
+  const getActiveFeatures = () => {
+    const features = [];
+    
+    if (userProfile.height < 160) features.push('Petite styling');
+    else if (userProfile.height > 170) features.push('Tall styling');
+    
+    if (userProfile.bodyShape) features.push(`${userProfile.bodyShape} optimized`);
+    if (userProfile.skinTone) features.push(`${userProfile.skinTone} tone matched`);
+    if (userProfile.faceShape) features.push(`${userProfile.faceShape} face enhanced`);
+    
+    return features;
+  };
+
   return (
     <Card className="bg-[#252631] border-[#2a2d3a] h-full">
       <CardContent className="p-8 flex flex-col items-center justify-center h-full">
-        {/* Avatar Display */}
-        <div className="relative mb-8">
-          <div className="w-80 h-96 bg-gradient-to-b from-[#ffa726]/20 to-[#ff7043]/20 rounded-2xl flex items-center justify-center border border-[#ffa726]/30">
-            <div className="text-center">
-              <div className="text-9xl mb-4 animate-bounce">👤</div>
-              <div className="text-4xl mb-2">🥻</div>
-              <p className="text-[#ffa726] font-semibold">Kerala Traditional Wear</p>
-            </div>
-          </div>
-          
-          {/* Professional lighting effect */}
-          <div className="absolute -inset-4 bg-gradient-to-r from-transparent via-[#ffa726]/10 to-transparent rounded-3xl blur-xl"></div>
+        {/* Digital Avatar Display */}
+        <div className="relative mb-8 w-full max-w-sm">
+          <DigitalAvatar userProfile={userProfile} />
         </div>
 
         {/* Avatar Info */}
@@ -66,16 +59,16 @@ const AvatarPanel = ({ userProfile }: AvatarPanelProps) => {
           </p>
 
           {/* Active Styling Features */}
-          {getAvatarStyle().length > 0 && (
+          {getActiveFeatures().length > 0 && (
             <div className="space-y-2">
               <p className="text-[#ffa726] font-semibold text-sm">Active Styling:</p>
               <div className="flex flex-wrap gap-2 justify-center">
-                {getAvatarStyle().map((style, index) => (
+                {getActiveFeatures().map((feature, index) => (
                   <span 
                     key={index}
                     className="px-3 py-1 bg-[#ffa726]/20 text-[#ffa726] rounded-full text-xs border border-[#ffa726]/30"
                   >
-                    {style}
+                    {feature}
                   </span>
                 ))}
               </div>
